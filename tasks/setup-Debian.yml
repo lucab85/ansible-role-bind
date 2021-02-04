@@ -1,5 +1,5 @@
 ---
 - name: Ensure Bind packages are installed.
-  yum:
+  apt:
     name: "{{ bind_packages }}"
     state: present
