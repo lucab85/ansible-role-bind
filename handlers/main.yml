@@ -1,0 +1,6 @@
+---
+- name: restart bind
+  service:
+    name: "{{ bind_daemon }}"
+    state: "{{ bind_restarted_state }}"
+    sleep: 5

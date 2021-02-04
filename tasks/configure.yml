@@ -1,0 +1,59 @@
+---
+- name: Configure global settings.
+  lineinfile:
+    dest: "{{ bind_main_config_path }}/named.conf"
+    regexp: "{{ item.option }}"
+    line: "{{ item.option }} {{ item.value }}"
+    state: "{{ item.state | default('present') }}"
+    mode: 0644
+  with_items: "{{ bind_global_config_options }}"
+  notify: restart bind
+
+- name: Ensure dirs exist.
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+    mode: 0755
+  with_items:
+    - "{{ bind_local_config_path }}"
+    - "{{ bind_zones_config_path }}"
+  when: bind_zones_entries | length > 0
+
+- name: Configure zones (if entries are configured).
+  template:
+    src: "named.conf.local.j2"
+    dest: "{{ bind_local_config_path }}/{{ bind_local_file }}"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+    mode: 0755
+  notify: restart bind
+  when: bind_zones_entries | length > 0
+
+- name: list zones files
+  debug:
+    msg: "{{ bind_zones_entries | map(attribute='file') | list }}"
+  when: bind_zones_entries | length > 0
+
+- name: Configure direct zones files (if entries are configured).
+  template:
+    src: "zone.db.j2"
+    dest: "{{ bind_zones_config_path }}/{{ item }}"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+    mode: 0755
+  with_items: "{{ bind_zones_entries | selectattr('template', 'equalto', 'db') | map(attribute='file') | list }}"
+  notify: restart bind
+  when: bind_zones_entries | length > 0
+
+- name: Configure indirect zones files (if entries are configured).
+  template:
+    src: "zone.rev.j2"
+    dest: "{{ bind_zones_config_path }}/{{ item }}"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+    mode: 0755
+  with_items: "{{ bind_zones_entries | selectattr('template', 'equalto', 'rev') | map(attribute='file') | list }}"
+  notify: restart bind
+  when: bind_zones_entries | length > 0

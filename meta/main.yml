@@ -1,0 +1,33 @@
+---
+galaxy_info:
+  author: Luca Berton
+  description: Setup a DNS service on a Fedora/Centos/RHEL target
+  company: Luca Berton
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.9
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+    - name: Fedora
+      versions:
+        - 30
+        - 31
+        - 32
+        - 33
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+        - focal
+
+  galaxy_tags:
+    - dns
+    - bind
+    - named
+    - reverse
+    - zone

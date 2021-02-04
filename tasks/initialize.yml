@@ -1,0 +1,7 @@
+---
+- name: Set Bind environment variables.
+  template:
+    src: bind.sh.j2
+    dest: /etc/profile.d/bind.sh
+    mode: 0644
+  notify: restart bind

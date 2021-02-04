@@ -1,0 +1,44 @@
+---
+# Variable configuration.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Define bind_packages.
+  set_fact:
+    bind_packages: "{{ __bind_packages | list }}"
+  when: bind_packages is not defined
+
+- name: Define bind_daemon.
+  set_fact:
+    bind_daemon: "{{ __bind_daemon }}"
+  when: bind_daemon is not defined
+
+- name: Define bind_user.
+  set_fact:
+    bind_user: "{{ __bind_user }}"
+  when: bind_user is not defined
+
+- name: Define bind_group.
+  set_fact:
+    bind_group: "{{ __bind_group }}"
+  when: bind_group is not defined
+
+- name: Define bind_bin_path.
+  set_fact:
+    bind_bin_path: "{{ __bind_bin_path }}"
+  when: bind_bin_path is not defined
+
+- name: Define bind_main_config_path.
+  set_fact:
+    bind_main_config_path: "{{ __bind_main_config_path }}"
+  when: bind_main_config_path is not defined
+
+- name: Define bind_local_config_path.
+  set_fact:
+    bind_local_config_path: "{{ __bind_local_config_path }}"
+  when: bind_local_config_path is not defined
+
+- name: Define bind_zones_config_path.
+  set_fact:
+    bind_zones_config_path: "{{ __bind_zones_config_path }}"
+  when: bind_zones_config_path is not defined

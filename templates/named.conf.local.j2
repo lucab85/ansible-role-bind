@@ -1,0 +1,8 @@
+{{ ansible_managed | comment }}
+{% for item in bind_zones_entries %}
+zone "{{ item.name }}" IN {
+    type {{ item.type }};
+    file "{{ item.file }}";
+    allow-update { none; };
+};
+{% endfor %}

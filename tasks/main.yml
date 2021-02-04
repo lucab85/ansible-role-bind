@@ -1,0 +1,19 @@
+---
+# Variable configuration.
+- include_tasks: variables.yml
+
+# Setup/install tasks.
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include_tasks: initialize.yml
+- include_tasks: configure.yml
+
+- name: Ensure Bind is started and enabled on boot.
+  service:
+    name: "{{ bind_daemon }}"
+    state: "{{ bind_service_state }}"
+    enabled: "{{ bind_service_enabled }}"

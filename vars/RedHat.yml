@@ -1,0 +1,11 @@
+---
+__bind_daemon: named
+__bind_bin_path: "/usr/bin"
+__bind_main_config_path: "/etc"
+__bind_local_config_path: "/etc/named"
+__bind_zones_config_path: "/var/named"
+__bind_packages:
+  - bind
+  - bind-utils
+__bind_user: named
+__bind_group: named
