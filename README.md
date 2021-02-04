@@ -1,5 +1,7 @@
 # Ansible Role: DNS
 
+[![CI](https://github.com/lucab85/ansible-role-bind/workflows/CI/badge.svg?event=push)](https://github.com/lucab85/ansible-role-bind/actions?query=workflow%3ACI)
+
 Installs and configures DNS server on Fedora/RHEL/CentOS servers.
 
 ## Requirements
