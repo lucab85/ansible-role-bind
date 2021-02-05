@@ -12,5 +12,4 @@
       changed_when: false
 
   roles:
-#    - role: ansible-role-bind
-    - role: lucab85.bind
+    - role: ansible-role-bind
