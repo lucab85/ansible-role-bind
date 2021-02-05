@@ -36,22 +36,22 @@
 
 - name: Configure direct zones files (if entries are configured).
   template:
-    src: "zone.db.j2"
+    src: "zone.fwd.j2"
     dest: "{{ bind_zones_config_path }}/{{ item }}"
     owner: "{{ bind_user }}"
     group: "{{ bind_group }}"
     mode: 0755
-  with_items: "{{ bind_zones_entries | selectattr('template', 'equalto', 'db') | map(attribute='file') | list }}"
+  with_items: "{{ bind_zones_entries | selectattr('template', 'equalto', 'zone.fwd.j2') | map(attribute='file') | list }}"
   notify: restart bind
   when: bind_zones_entries | length > 0
 
-- name: Configure indirect zones files (if entries are configured).
+- name: Configure reverse zones files (if entries are configured).
   template:
     src: "zone.rev.j2"
     dest: "{{ bind_zones_config_path }}/{{ item }}"
     owner: "{{ bind_user }}"
     group: "{{ bind_group }}"
     mode: 0755
-  with_items: "{{ bind_zones_entries | selectattr('template', 'equalto', 'rev') | map(attribute='file') | list }}"
+  with_items: "{{ bind_zones_entries | selectattr('template', 'equalto', 'zone.rev.j2') | map(attribute='file') | list }}"
   notify: restart bind
   when: bind_zones_entries | length > 0

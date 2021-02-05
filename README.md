@@ -68,8 +68,8 @@ The settings are defined in the auxiliary configuration file `/etc/named/named.c
 Example:
 
     bind_zones_entries:
-      - {name: "example.com", type: "master", file: "example.com.zone", template: db}
-      - {name: "1.0.10.in-addr.arpa", type: "master", file: "example.com.rr.zone", template: rev}
+      - {name: "example.com", type: "master", file: "example.com.zone", template: zone.fwd.j2}
+      - {name: "1.0.10.in-addr.arpa", type: "master", file: "example.com.rr.zone", template: zone.rev.j2}
 
 Example output:
 
@@ -170,8 +170,8 @@ None.
 *Inside `vars/main.yml`*:
 
     bind_zones_entries:
-      - {name: "example.com", type: "master", file: "example.com.zone", template: db}
-      - {name: "1.0.10.in-addr.arpa", type: "master", file: "example.com.rr.zone", template: rev}
+    - {name: "example.com", type: "master", file: "example.com.zone", template: zone.fwd.j2}
+    - {name: "1.0.10.in-addr.arpa", type: "master", file: "example.com.rr.zone", template: zone.rev.j2}
 
 ## License
 
