@@ -38,6 +38,11 @@
     bind_option_config: "{{ __bind_option_config }}"
   when: bind_option_config is not defined
 
+- name: Define bind_directory.
+  set_fact:
+    bind_directory: "{{ __bind_directory }}"
+  when: bind_directory is not defined
+
 - name: Define bind_local_config_path.
   set_fact:
     bind_local_config_path: "{{ __bind_local_config_path }}"

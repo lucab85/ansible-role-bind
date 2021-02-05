@@ -26,6 +26,10 @@ bind_main_options_settings:
     value: '{ trusted; };'
   - option: forwarders
     value: '{ 8.8.8.8; 8.8.4.4; };'
+  - option: listen-on-v6
+    value: '{ any; };'
+  - option: dnssec-validation
+    value: 'auto;'
 
 bind_zones_entries:
   - {name: "example.com", type: "master", file: "example.com.zone", template: db}

@@ -1,0 +1,11 @@
+{{ ansible_managed | comment }}
+options {
+    directory "{{ bind_directory }}";
+{% for item in bind_main_options_settings %}
+    {{ item.option }} {{ item.value }}
+{% endfor %}
+};
+
+{% for item in bind_main_config_settings %}
+{{ item.option }} {{ item.value }}
+{% endfor %}

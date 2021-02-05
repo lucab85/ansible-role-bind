@@ -10,3 +10,4 @@ __bind_packages:
   - bind-utils
 __bind_user: named
 __bind_group: named
+__bind_directory: "/var/named"

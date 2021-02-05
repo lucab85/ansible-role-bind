@@ -1,24 +1,11 @@
 ---
-- name: Configure main settings.
-  lineinfile:
+- name: Configure local options settings (if entries are configured).
+  template:
+    src: "named.conf.j2"
     dest: "{{ bind_main_config }}"
-    regexp: "{{ item.option | regex_escape() }}"
-    line: "{{ item.option }} {{ item.value }}"
-    state: "{{ item.state | default('present') }}"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
     mode: 0644
-  with_items: "{{ bind_main_config_settings }}"
-  notify: restart bind
-
-- name: Configure main options settings.
-  lineinfile:
-    dest: "{{ bind_option_config }}"
-    state: "{{ item.state | default('present') }}"
-    mode: 0644
-    regexp: "{{ item.option | regex_escape() }}"
-    insertafter: '^options \{'
-    line: |
-      {{ item.option }} {{ item.value }}
-  with_items: "{{ bind_main_options_settings }}"
   notify: restart bind
 
 - name: Ensure dirs exist.
@@ -33,15 +20,14 @@
     - "{{ bind_zones_config_path }}"
   when: bind_zones_entries | length > 0
 
-- name: Configure zones (if entries are configured).
+- name: Configure local options settings (if entries are configured).
   template:
     src: "named.conf.local.j2"
     dest: "{{ bind_local_config_path }}/{{ bind_local_file }}"
     owner: "{{ bind_user }}"
     group: "{{ bind_group }}"
-    mode: 0755
+    mode: 0644
   notify: restart bind
-  when: bind_zones_entries | length > 0
 
 - name: list zones files
   debug:
