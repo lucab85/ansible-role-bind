@@ -13,13 +13,19 @@ bind_local_file: "named.conf.local"
 
 # Global configuration options that will be set in named.conf.
 # Please note each value ends with ;
-bind_global_config_options:
-  - option: listen-on port
-    value: '53 { 127.0.0.1; 10.0.1.1; };'
+bind_main_config_settings:
   - option: acl "trusted"
     value: '{ 10.0.1.1; 10.0.1.2; };'
   - option: include
     value: '"{{ bind_local_config_path }}/{{ bind_local_file }}";'
+
+bind_main_options_settings:
+  - option: listen-on port
+    value: '53 { 127.0.0.1; 10.0.1.1; };'
+  - option: allow-query
+    value: '{ trusted; };'
+  - option: forwarders
+    value: '{ 8.8.8.8; 8.8.4.4; };'
 
 bind_zones_entries:
   - {name: "example.com", type: "master", file: "example.com.zone", template: db}

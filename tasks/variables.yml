@@ -33,6 +33,11 @@
     bind_main_config: "{{ __bind_main_config }}"
   when: bind_main_config is not defined
 
+- name: Define bind_option_config.
+  set_fact:
+    bind_option_config: "{{ __bind_option_config }}"
+  when: bind_option_config is not defined
+
 - name: Define bind_local_config_path.
   set_fact:
     bind_local_config_path: "{{ __bind_local_config_path }}"

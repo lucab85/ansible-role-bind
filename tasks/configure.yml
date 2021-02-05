@@ -1,12 +1,24 @@
 ---
-- name: Configure global settings.
+- name: Configure main settings.
   lineinfile:
     dest: "{{ bind_main_config }}"
-    regexp: "{{ item.option }}"
+    regexp: "^#?.+{{ item.option | regex_escape() }}"
     line: "{{ item.option }} {{ item.value }}"
     state: "{{ item.state | default('present') }}"
     mode: 0644
-  with_items: "{{ bind_global_config_options }}"
+  with_items: "{{ bind_main_config_settings }}"
+  notify: restart bind
+
+- name: Configure main options settings.
+  lineinfile:
+    dest: "{{ bind_option_config }}"
+    state: "{{ item.state | default('present') }}"
+    mode: 0644
+    regexp: "^#?.+{{ item.option | regex_escape() }}"
+    insertafter: '^options \{'
+    line: |
+      {{ item.option }} {{ item.value }}
+  with_items: "{{ bind_main_options_settings }}"
   notify: restart bind
 
 - name: Ensure dirs exist.

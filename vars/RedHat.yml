@@ -2,6 +2,7 @@
 __bind_daemon: named
 __bind_bin_path: "/usr/bin"
 __bind_main_config: "/etc/named.conf"
+__bind_option_config: "/etc/named.conf"
 __bind_local_config_path: "/etc/named"
 __bind_zones_config_path: "/var/named"
 __bind_packages:
