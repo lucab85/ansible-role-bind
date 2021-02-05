@@ -1,7 +1,9 @@
 ---
 galaxy_info:
   author: Luca Berton
-  description: Setup a DNS service on a Fedora/Centos/RHEL target
+  description:
+    Setup a BIND9 DNS service on Fedora/Centos/RHEL7/8 and Debian/Ubuntu target as authoritative for
+    one or more domains (master and/or slave) with customized zone and reverse.
   company: Luca Berton
   license: "license (BSD, MIT)"
   min_ansible_version: 2.9
@@ -12,17 +14,13 @@ galaxy_info:
         - 8
     - name: Fedora
       versions:
-        - 30
-        - 31
-        - 32
+        - all
     - name: Debian
       versions:
         - all
     - name: Ubuntu
       versions:
-        - trusty
-        - xenial
-        - focal
+        - all
 
   galaxy_tags:
     - dns

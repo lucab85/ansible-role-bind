@@ -3,6 +3,6 @@
 zone "{{ item.name }}" IN {
     type {{ item.type }};
     file "{{ item.file }}";
-    allow-update { none; };
+    {{ item.options }}
 };
 {% endfor %}

@@ -1,5 +1,10 @@
 ---
 # Variable configuration.
+- name: Define bind_zone_template.
+  set_fact:
+    bind_zone_template: "zone.j2"
+  when: bind_zone_template is not defined
+
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
@@ -52,3 +57,28 @@
   set_fact:
     bind_zones_config_path: "{{ __bind_zones_config_path }}"
   when: bind_zones_config_path is not defined
+
+- name: Define bind_checkconf.
+  set_fact:
+    bind_checkconf: "{{ __bind_checkconf }}"
+  when: bind_checkconf is not defined
+
+- name: Define bind_checkzone.
+  set_fact:
+    bind_checkzone: "{{ __bind_checkzone }}"
+  when: bind_checkzone is not defined
+
+- name: Define bind_main_setype.
+  set_fact:
+    bind_main_setype: "{{ __bind_main_setype }}"
+  when: bind_main_setype is not defined
+
+- name: Define bind_local_config_setype.
+  set_fact:
+    bind_local_config_setype: "{{ __bind_local_config_setype }}"
+  when: bind_local_config_setype is not defined
+
+- name: Define bind_zones_config_setype.
+  set_fact:
+    bind_zones_config_setype: "{{ __bind_zones_config_setype }}"
+  when: bind_zones_config_setype is not defined

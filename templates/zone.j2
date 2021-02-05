@@ -1,0 +1,5 @@
+$ORIGIN {{ item.name }}.
+$TTL {{ item.ttl }};
+{% for r in item.records %}
+{{ r.name }}  IN  {{ r.type }} {{ r.value }}
+{% endfor %}

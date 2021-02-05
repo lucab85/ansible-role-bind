@@ -1,32 +1,36 @@
 ---
-- name: Configure local options settings (if entries are configured).
-  template:
-    src: "named.conf.j2"
-    dest: "{{ bind_main_config }}"
-    owner: "{{ bind_user }}"
-    group: "{{ bind_group }}"
-    mode: 0644
-  notify: restart bind
-
-- name: Ensure dirs exist.
+- name: Ensure zone dirs exist (if entries are configured).
   file:
-    path: "{{ item }}"
+    path: "{{ item.path }}"
     state: directory
     owner: "{{ bind_user }}"
     group: "{{ bind_group }}"
     mode: 0755
+    setype: "{{ item.setype }}"
   with_items:
-    - "{{ bind_local_config_path }}"
-    - "{{ bind_zones_config_path }}"
+    - {path: "{{ bind_local_config_path }}", setype: "{{ bind_local_config_setype }}"}
+    - {path: "{{ bind_zones_config_path }}", setype: "{{ bind_local_config_setype }}"}
   when: bind_zones_entries | length > 0
 
-- name: Configure local options settings (if entries are configured).
+- name: Configure local options settings.
   template:
     src: "named.conf.local.j2"
     dest: "{{ bind_local_config_path }}/{{ bind_local_file }}"
     owner: "{{ bind_user }}"
     group: "{{ bind_group }}"
     mode: 0644
+    setype: "{{ bind_main_setype }}"
+  notify: restart bind
+
+- name: Configure main options settings.
+  template:
+    src: "named.conf.j2"
+    dest: "{{ bind_main_config }}"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+    mode: 0644
+    setype: "{{ bind_local_config_setype }}"
+    validate: "{{ bind_checkconf }} %s"
   notify: restart bind
 
 - name: list zones files
@@ -34,24 +38,15 @@
     msg: "{{ bind_zones_entries | map(attribute='file') | list }}"
   when: bind_zones_entries | length > 0
 
-- name: Configure direct zones files (if entries are configured).
+- name: Configure zones files (if entries are configured).
   template:
-    src: "zone.fwd.j2"
-    dest: "{{ bind_zones_config_path }}/{{ item }}"
+    src: "{{ bind_zone_template }}"
+    dest: "{{ bind_zones_config_path }}/{{ item.file }}"
     owner: "{{ bind_user }}"
     group: "{{ bind_group }}"
-    mode: 0755
-  with_items: "{{ bind_zones_entries | selectattr('template', 'equalto', 'zone.fwd.j2') | map(attribute='file') | list }}"
-  notify: restart bind
-  when: bind_zones_entries | length > 0
-
-- name: Configure reverse zones files (if entries are configured).
-  template:
-    src: "zone.rev.j2"
-    dest: "{{ bind_zones_config_path }}/{{ item }}"
-    owner: "{{ bind_user }}"
-    group: "{{ bind_group }}"
-    mode: 0755
-  with_items: "{{ bind_zones_entries | selectattr('template', 'equalto', 'zone.rev.j2') | map(attribute='file') | list }}"
+    mode: 0644
+    setype: "{{ bind_zones_config_setype }}"
+    validate: "{{ bind_checkzone }} {{ item.name }} %s"
+  loop: "{{ bind_zones_entries }}"
   notify: restart bind
   when: bind_zones_entries | length > 0

@@ -2,12 +2,17 @@
 __bind_daemon: named
 __bind_bin_path: "/usr/bin"
 __bind_main_config: "/etc/named.conf"
+__bind_main_setype: "named_conf_t"
 __bind_option_config: "/etc/named.conf"
 __bind_local_config_path: "/etc/named"
+__bind_local_config_setype: "named_conf_t"
 __bind_zones_config_path: "/var/named"
+__bind_zones_config_setype: "named_conf_t"
 __bind_packages:
   - bind
   - bind-utils
 __bind_user: named
 __bind_group: named
 __bind_directory: "/var/named"
+__bind_checkconf: "/usr/sbin/named-checkconf"
+__bind_checkzone: "/usr/sbin/named-checkzone"
