@@ -2,7 +2,7 @@
 - name: Configure main settings.
   lineinfile:
     dest: "{{ bind_main_config }}"
-    regexp: "^#?.+{{ item.option | regex_escape() }}"
+    regexp: "{{ item.option | regex_escape() }}"
     line: "{{ item.option }} {{ item.value }}"
     state: "{{ item.state | default('present') }}"
     mode: 0644
@@ -14,7 +14,7 @@
     dest: "{{ bind_option_config }}"
     state: "{{ item.state | default('present') }}"
     mode: 0644
-    regexp: "^#?.+{{ item.option | regex_escape() }}"
+    regexp: "{{ item.option | regex_escape() }}"
     insertafter: '^options \{'
     line: |
       {{ item.option }} {{ item.value }}
