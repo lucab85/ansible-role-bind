@@ -28,3 +28,11 @@ galaxy_info:
     - named
     - reverse
     - zone
+    - system
+    - networking
+    - nameserver
+    - resolv
+    - redhat
+    - debian
+    - ubuntu
+    - fedora
