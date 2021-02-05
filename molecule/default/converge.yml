@@ -3,11 +3,7 @@
   hosts: all
 
   vars:
-    nginx_use_ppa: true
-    nginx_remove_default_vhost: true
-    nginx_vhosts:
-      - server_name: "test.dev"
-        root: "/var/www/test"
+    bind_service_enabled: true
 
   pre_tasks:
     - name: Update apt cache.
@@ -16,4 +12,5 @@
       changed_when: false
 
   roles:
+#    - role: ansible-role-bind
     - role: lucab85.bind

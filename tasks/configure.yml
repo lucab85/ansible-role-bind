@@ -1,7 +1,7 @@
 ---
 - name: Configure global settings.
   lineinfile:
-    dest: "{{ bind_main_config_path }}/named.conf"
+    dest: "{{ bind_main_config }}"
     regexp: "{{ item.option }}"
     line: "{{ item.option }} {{ item.value }}"
     state: "{{ item.state | default('present') }}"

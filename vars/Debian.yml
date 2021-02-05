@@ -1,9 +1,9 @@
 ---
 __bind_daemon: bind9
 __bind_bin_path: "/usr/bin"
-__bind_main_config_path: "/etc/bind"
+__bind_main_config: "/etc/bind/named.conf.options"
 __bind_local_config_path: "/etc/bind"
-__bind_zones_config_path: "/var/cache/bind"
+__bind_zones_config_path: "/etc/bind"
 __bind_packages:
   - bind9
   - bind9utils
