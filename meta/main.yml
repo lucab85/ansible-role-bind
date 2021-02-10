@@ -6,7 +6,7 @@ galaxy_info:
     one or more domains (master and/or slave) with customized zone and reverse.
   company: Luca Berton
   license: "license (BSD, MIT)"
-  min_ansible_version: 2.9
+  min_ansible_version: 2.7
   platforms:
     - name: EL
       versions:

@@ -12,7 +12,7 @@ No special requirements; note that this role requires root access, so either run
 
     - hosts: dns
       roles:
-        - role: dns
+        - role: lucab85.ansible_role_bind
           become: yes
 
 ## Role Variables
@@ -186,7 +186,7 @@ None.
       roles:
         - lucab85.ansible_role_bind
 
-*Inside `vars/main.yml`*:
+* Inside `vars/main.yml`*:
 
     bind_zones_entries:
       - name: "example.com"
