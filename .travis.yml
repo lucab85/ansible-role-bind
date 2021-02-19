@@ -18,7 +18,7 @@ before_install:
 
 install:
   # Install test dependencies.
-  - pip install molecule[docker] yamllint ansible-lint docker
+  - pip install molecule[docker] yamllint ansible ansible-lint docker
 
 script:
   # Run tests.
