@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Luca Berton
+  author: lucab85
   description:
     Setup a BIND9 DNS service on Fedora/Centos/RHEL7/8 and Debian/Ubuntu target as authoritative for
     one or more domains (master and/or slave) with customized zone and reverse.

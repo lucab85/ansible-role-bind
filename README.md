@@ -186,7 +186,7 @@ None.
       roles:
         - lucab85.ansible_role_bind
 
-* Inside `vars/main.yml`*:
+Customize variables in `vars/main.yml`:
 
     bind_zones_entries:
       - name: "example.com"
