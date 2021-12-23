@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: ansible_role_bind
   author: lucab85
   description:
     Setup a BIND9 DNS service on Fedora/Centos/RHEL7/8 and Debian/Ubuntu target as authoritative for

@@ -216,4 +216,21 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2021 by [Luca Berton](https://www.lucaberton.it/).
+This role was created in 2021 by [Luca Berton](https://www.lucaberton.it/), author of [Ansible Pilot](https://www.ansiblepilot.com/).
+
+## Ansible Pilot
+
+More information:
+
+- [Website](https://www.ansiblepilot.com/)
+- [Ansible Pilot YouTube channel](https://www.youtube.com/channel/UC5MNbTYRHSCu9vAki3z9SmA)
+- [Medium](https://ansiblepilot.medium.com/)
+- [Twitter](https://twitter.com/ansiblepilot)
+
+## Donate
+
+Thank you for supporting me:
+
+- [Patreon](https://patreon.com/lucaberton)
+- [Buy me a pizza](https://www.buymeacoffee.com/lucab)
+- [GitHub sponsor](https://github.com/sponsors/lucab85)
